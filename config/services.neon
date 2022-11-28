@@ -1,0 +1,14 @@
+# Services injected into the Dependency-Injection container.
+
+services:
+	- App\Model\Router\RouterFactory::create
+	- App\Model\Security\Passwords(%security.hash%)
+	- App\Model\User\Auth\UserAuthenticator
+
+search:
+    model:
+        in: %appDir%/Model
+        classes:
+            - *Facade
+            - *Factory
+            - *Router
