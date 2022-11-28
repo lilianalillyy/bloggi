@@ -7,10 +7,12 @@ use App\Model\Post\PostFacade;
 use App\Model\Post\Rating\PostRating;
 use App\Model\Post\Rating\PostRatingFacade;
 use App\Model\Post\Rating\PostRatingKind;
+use App\Model\Presenters\Traits\RequiresAuth;
 use App\Module\Front\BaseFrontPresenter;
 
 class PostPresenter extends BaseFrontPresenter
 {
+  use RequiresAuth;
 
   public function __construct(
     private readonly PostFacade $postFacade,
@@ -55,16 +57,6 @@ class PostPresenter extends BaseFrontPresenter
     $this->ratingFacade->ratePost($post, $this->getLoggedUserOrFail(), PostRatingKind::Dislike);
 
     $this->redirect(":view", ["id" => $id]);
-  }
-
-  protected function startup()
-  {
-    if (!$this->getUser()->isLoggedIn()) {
-      $this->flashMessage("Nejste přihlášeni.", "danger");
-      $this->redirect("Auth:login");
-    }
-
-    parent::startup();
   }
 
 }

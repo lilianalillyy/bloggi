@@ -9,7 +9,7 @@ use Nette\Utils\Paginator;
 class HomepageTemplate extends BaseFrontTemplate
 {
 
-  public Post $latestPost;
+  public ?Post $latestPost;
 
   public Paginator $paginator;
 

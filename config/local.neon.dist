@@ -5,7 +5,7 @@ parameters:
 		dbname: bloggi
 		user: root
 		password:
-		driver: mysql
+		driver: pdo_mysql
 
 	security:
 	  hash: argon2id

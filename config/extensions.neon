@@ -21,7 +21,7 @@ webpack:
 		publicPath: build/
 	devServer:
 		enabled: %debugMode%
-		url: http://localhost:3000
+		url: http://localhost:8080/build
 		timeout: 0.1
 
 nettrine.dbal:

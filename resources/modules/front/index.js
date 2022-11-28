@@ -3,7 +3,7 @@ import topbar from "topbar";
 import naja, { Naja } from "naja";
 import { Dropdown } from 'bootstrap'
 
-document.querySelectorAll('.dropdown').forEach(Dropdown)
+document.querySelectorAll('.dropdown').forEach((el) => new Dropdown(el))
 
 topbar.config({
   barColors: {

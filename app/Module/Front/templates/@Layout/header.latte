@@ -7,7 +7,7 @@
       <div class="col-4 d-flex justify-content-end align-items-center">
         {if $user->isLoggedIn()}
           <div class=dropdown">
-            <button type="button" class="btn btn-sm btn-secondary dropdown-toggle btn-labeled" data-toggle="dropdown"
+            <button type="button" class="btn btn-sm btn-secondary dropdown-toggle btn-labeled" data-bs-toggle="dropdown"
                     aria-expanded="false">
               <span class="btn-label">
                 <svg width="18px" height="18px" style="margin-top: -4px" fill="none" stroke="currentColor"
@@ -17,7 +17,7 @@
                 </svg>
               </span>
             </button>
-            <div class="dropdown-menu dropdown-menu-right">
+            <div class="dropdown-menu dropdown-menu-end">
               <p class="dropdown-header">Přihlášen/a jako <b>{$loggedUser->getUsername()}</b></p>
               <a class="dropdown-item ajax" n:href="User:default">Můj účet</a>
               <div class="dropdown-divider"></div>
