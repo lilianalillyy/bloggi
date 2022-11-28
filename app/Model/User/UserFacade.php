@@ -3,6 +3,7 @@
 namespace App\Model\User;
 
 use App\Exception\UnexpectedValueException;
+use App\Model\Auth\Form\Data\RegisterFormData;
 use App\Model\Database\EntityManager;
 use App\Model\Security\Passwords;
 
@@ -85,17 +86,17 @@ class UserFacade
   }
 
   /**
-   * Create a new user from array values.
+   * Create a new user from a register form.
    *
-   * @param array<string, mixed> $values
+   * @param RegisterFormData $data
    * @return User
    */
-  public function create(array $values): User
+  public function create(RegisterFormData $data): User
   {
     $user = (new User())
-      ->setUsername($values['username'])
-      ->setPasswordHash($this->createPasswordHash($values['password']))
-      ->setEmail($values['email']);
+      ->setUsername($data->username)
+      ->setPasswordHash($this->createPasswordHash($data->password))
+      ->setEmail($data->email);
 
     $this->em->persist($user);
 

@@ -3,10 +3,12 @@
 namespace App\Model\Presenters;
 
 use App\Model\Database\EntityManager;
+use Nette\Application\Attributes\Persistent;
 use Nette\Application\Response;
 use Nette\Application\UI\Presenter;
 use App\Model\Presenters\Traits\Redraws;
 use App\Model\Presenters\Traits\ManagesUsers;
+use App\Model\Presenters\Traits\ManagesSnippets;
 use Nette\DI\Attributes\Inject;
 
 /**
@@ -16,6 +18,10 @@ class BasePresenter extends Presenter {
 
   use Redraws;
   use ManagesUsers;
+  use ManagesSnippets;
+
+  #[Persistent]
+  public string $backlink = "";
 
   public const DEFAULT_REDRAW = [
     "title",

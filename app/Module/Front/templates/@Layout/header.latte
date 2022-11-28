@@ -21,14 +21,14 @@
               <p class="dropdown-header">Přihlášen/a jako <b>{$loggedUser->getUsername()}</b></p>
               <a class="dropdown-item ajax" n:href="User:default">Můj účet</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" n:href="Auth:logout">Odhlásit se</a>
+              <a class="dropdown-item" n:href=":Security:Auth:logout">Odhlásit se</a>
             </div>
           </div>
 
         {else}
-          <a class="btn btn-sm btn-light mr-3" n:href="Auth:login">Přihlášení</a>
+          <a class="btn btn-sm btn-light mr-3" n:href=":Security:Auth:login">Přihlášení</a>
 
-          <a class="btn btn-sm btn-outline-secondary" n:href="Auth:register">Registrace</a>
+          <a class="btn btn-sm btn-outline-secondary" n:href=":Security:Auth:register">Registrace</a>
         {/if}
       </div>
     </div>

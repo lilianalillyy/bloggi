@@ -6,6 +6,8 @@ use Nette\Application\UI\Presenter;
 
 trait RequiresAuth {
 
+  use ManagesSnippets;
+
   public function injectRequiresAuth(): void
   {
     $this->onStartup[] = fn (...$params) => $this->validateAuth(...$params);
@@ -17,7 +19,8 @@ trait RequiresAuth {
     $self = $this;
 
     if (!$self->getUser()->isLoggedIn()) {
-      $self->redirect("Auth:login");
+      $this->forceRedirect();
+      $self->redirect(":Security:Auth:login", ['backlink' => $this->storeRequest()]);
     }
   }
 

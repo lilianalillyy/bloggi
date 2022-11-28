@@ -1,17 +1,21 @@
 <?php declare(strict_types=1);
 
-namespace App\Module\Front\Auth;
+namespace App\Module\Security\Auth;
 
 use App\Exception\AuthenticationException;
+use App\Model\Auth\Form\Data\LoginFormData;
+use App\Model\Auth\Form\Data\RegisterFormData;
 use App\Model\Auth\Form\LoginFormFactory;
 use App\Model\Auth\Form\RegisterFormFactory;
 use App\Model\User\Auth\UserIdentity;
 use App\Model\User\UserFacade;
-use App\Module\Front\BaseFrontPresenter;
+use App\Module\Security\BaseSecurityPresenter;
 use Nette\Application\UI\Form;
 
-class AuthPresenter extends BaseFrontPresenter
+class AuthPresenter extends BaseSecurityPresenter
 {
+
+  public const HOMEPAGE_REDIRECT = ":Front:Homepage:default";
 
   public function __construct(
     private readonly LoginFormFactory $loginFormFactory,
@@ -26,23 +30,26 @@ class AuthPresenter extends BaseFrontPresenter
   {
     if (!$this->getUser()->isLoggedIn()) {
       $this->flashMessage('Nejste přihlášeni.', 'warning');
-      $this->redirect('Homepage:default');
+      $this->redirect(self::HOMEPAGE_REDIRECT);
     }
 
     $this->getUser()->logout(true);
     $this->flashMessage('Úspěšně odhlášeni.', 'success');
-    $this->redirect('Homepage:default');
+
+    $this->restoreRequest($this->backlink);
+    $this->redirect(self::HOMEPAGE_REDIRECT);
   }
 
   public function createComponentLoginForm(): Form
   {
     $form = $this->loginFormFactory->create();
 
-    $form->onSubmit[] = function (Form $form) {
-      $values = $form->getValues();
+    $form->onSuccess[] = function (Form $form, LoginFormData $data) {
       try {
-        $this->getUser()->login($values["username"], $values["password"]);
-        $this->redirect("Homepage:default");
+        $this->getUser()->login($data->username, $data->password);
+
+        $this->restoreRequest($this->backlink);
+        $this->redirect(self::HOMEPAGE_REDIRECT);
       } catch (AuthenticationException $e) {
         $this->flashMessage($e->getMessage(), "danger");
       }
@@ -55,18 +62,18 @@ class AuthPresenter extends BaseFrontPresenter
   {
     $form = $this->registerFormFactory->create();
 
-    $form->onSubmit[] = function (Form $form) {
-      /** @var array<string, mixed> $values */
-      $values = $form->getValues('array');
+    $form->onSuccess[] = function (Form $form, RegisterFormData $data) {
 
-      if ($values["password"] !== $values["repeatPassword"]) {
+      if ($data->password !== $data->repeatPassword) {
         $this->flashMessage("Hesla se neschodují.");
         return;
       }
 
       try {
-        $this->user->login(new UserIdentity($this->userFacade->create($values)));
-        $this->redirect("Homepage:default");
+        $this->user->login(new UserIdentity($this->userFacade->create($data)));
+
+        $this->restoreRequest($this->backlink);
+        $this->redirect(self::HOMEPAGE_REDIRECT);
       } catch (AuthenticationException $e) {
         $this->flashMessage($e->getMessage(), "danger");
       }
@@ -79,7 +86,9 @@ class AuthPresenter extends BaseFrontPresenter
   {
     if ($this->getUser()->isLoggedIn() && $this->getAction() !== "logout") {
       $this->flashMessage('Již jste přihlášeni.', 'warning');
-      $this->redirect('Homepage:default');
+
+      $this->restoreRequest($this->backlink);
+      $this->redirect(self::HOMEPAGE_REDIRECT);
     }
 
     parent::startup();

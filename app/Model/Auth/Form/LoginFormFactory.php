@@ -7,9 +7,6 @@
  */
 namespace App\Model\Auth\Form;
 
-use Contributte\FormsBootstrap\BootstrapForm;
-use Contributte\FormsBootstrap\Enums\BootstrapVersion;
-use Contributte\FormsBootstrap\Enums\RenderMode;
 use Nette\Application\UI\Form;
 
 /**
@@ -20,13 +17,7 @@ class LoginFormFactory
 
   public function create(): Form
   {
-    $form = new BootstrapForm();
-
-    BootstrapForm::switchBootstrapVersion(BootstrapVersion::V5);
-
-    $form->setAjax();
-
-    $form->renderMode = RenderMode::SIDE_BY_SIDE_MODE;
+    $form = new Form();
 
     $form->addText('username', 'Uživatelské jméno')
       ->setMaxLength(32)

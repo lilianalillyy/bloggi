@@ -30,6 +30,7 @@ final class RouterFactory
     $router = new RouteList();
 
     $router->add(self::createAdminRouter());
+    $router->add(self::createSecurityRouter());
     $router->add(self::createFrontRouter());
 
     return $router;
@@ -42,6 +43,15 @@ final class RouterFactory
     $frontRouter->addRoute('<presenter>/<action>[/<id>]', 'Homepage:default');
 
     return $frontRouter;
+  }
+
+  private static function createSecurityRouter(): RouteList
+  {
+    $securityRouter = new RouteList('Security');
+
+    $securityRouter->addRoute('auth/<action>[/<id>]', 'Auth:default');
+
+    return $securityRouter;
   }
 
   private static function createAdminRouter(): RouteList
