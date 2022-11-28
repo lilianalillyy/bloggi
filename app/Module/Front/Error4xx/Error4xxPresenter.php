@@ -9,7 +9,7 @@ use Nette\Application\Request;
 /**
  * @property Error4xxTemplate $template
  */
-final class Error4XxPresenter extends BaseFrontPresenter
+final class Error4xxPresenter extends BaseFrontPresenter
 {
   public function startup(): void
   {
