@@ -1,61 +1,24 @@
 <!DOCTYPE html><!-- "' --></textarea></script></style></pre></xmp></a></audio></button></canvas></datalist></details></dialog></iframe></listing></meter></noembed></noframes></noscript></optgroup></option></progress></rp></select></table></template></title></video>
+
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
-<title>Server Error</title>
 
-<style>
-    #nette-error {
-        all: initial;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 70vh;
-        min-height: 400px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000
-    }
+<title>Error 500</title>
 
-    #nette-error div {
-        all: initial;
-        max-width: 550px;
-        background: white;
-        color: #333;
-        display: block
-    }
+<section id="bloggi-exception" class="flex items-center h-full sm:p-16 dark:bg-gray-900 dark:text-gray-100">
+	<div class="container flex flex-col items-center justify-center px-5 mx-auto my-8 space-y-8 text-center sm:max-w-md">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-40 h-40 dark:text-gray-600">
+			<path fill="currentColor" d="M256,16C123.452,16,16,123.452,16,256S123.452,496,256,496,496,388.548,496,256,388.548,16,256,16ZM403.078,403.078a207.253,207.253,0,1,1,44.589-66.125A207.332,207.332,0,0,1,403.078,403.078Z"></path>
+			<rect width="176" height="32" x="168" y="320" fill="currentColor"></rect>
+			<polygon fill="currentColor" points="210.63 228.042 186.588 206.671 207.958 182.63 184.042 161.37 162.671 185.412 138.63 164.042 117.37 187.958 141.412 209.329 120.042 233.37 143.958 254.63 165.329 230.588 189.37 251.958 210.63 228.042"></polygon>
+			<polygon fill="currentColor" points="383.958 182.63 360.042 161.37 338.671 185.412 314.63 164.042 293.37 187.958 317.412 209.329 296.042 233.37 319.958 254.63 341.329 230.588 365.37 251.958 386.63 228.042 362.588 206.671 383.958 182.63"></polygon>
+		</svg>
+		<p class="text-3xl">An internal server error occurred.</p>
+		<a rel="noopener noreferrer" href="/" class="px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900">Go Home</a>
+	</div>
+</section>
 
-    #nette-error h1 {
-        all: initial;
-        font: bold 50px/1.1 sans-serif;
-        display: block;
-        margin: 40px
-    }
-
-    #nette-error p {
-        all: initial;
-        font: 20px/1.4 sans-serif;
-        margin: 40px;
-        display: block
-    }
-
-    #nette-error small {
-        color: gray
-    }
-</style>
-
-<div id=nette-error>
-  <div>
-    <h1>Server Error</h1>
-
-    <p>We're sorry! The server encountered an internal error and
-      was unable to complete your request. Please try again later.</p>
-
-    <p><small>error 500</small></p>
-  </div>
-</div>
-
+<!-- Makes sure the error message is shown before any other element. -->
 <script>
-    document.body.insertBefore(document.getElementById('nette-error'), document.body.firstChild);
+    document.body.insertBefore(document.querySelector("#bloggi-exception"), document.body.firstChild);
 </script>

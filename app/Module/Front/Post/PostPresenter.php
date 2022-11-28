@@ -10,6 +10,9 @@ use App\Model\Post\Rating\PostRatingKind;
 use App\Model\Presenters\Traits\RequiresAuth;
 use App\Module\Front\BaseFrontPresenter;
 
+/**
+ * @property PostTemplate $template
+ */
 class PostPresenter extends BaseFrontPresenter
 {
   use RequiresAuth;
