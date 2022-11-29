@@ -13,7 +13,7 @@ use Nette\Http\IRequest;
 use Nette\Http\IResponse;
 use Nette\SmartObject;
 use Tracy\ILogger;
-use function App\Presenters\str_contains;
+use function str_contains;
 
 final class ErrorPresenter implements IPresenter
 {
@@ -37,8 +37,8 @@ final class ErrorPresenter implements IPresenter
     $this->logger->log($exception, ILogger::EXCEPTION);
 
     return new CallbackResponse(function (IRequest $request, IResponse $response): void {
-      if (str_contains($request->getHeader('Content-Type'), "text/html")) {
-        require __DIR__ . '/templates/Error/500.phtml';
+      if (str_contains($request->getHeader('Content-Type') ?? 'text/html', "text/html")) {
+        require __DIR__ . '/../templates/Error/500.phtml';
       }
     });
   }
