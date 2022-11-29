@@ -1,11 +1,30 @@
-# Nubium Trial
+# Bloggi
 
-## Installation
+TBD
+
+## Setting up development environment
 
 ### Requirements
 
 - Docker
 - Docker Compose
+- PHP 8.1 + Composer
+
+### Apply database migrations
+
+To initialize the database, apply all the database migrations:
+
+```shell
+./bin/console migrations:migrate
+``` 
+
+### Optional: Seed database with example data
+
+You can add example data to test the blog's functionality. This will also create a test user with credentials `test:password`.
+
+```shell
+./bin/console orm:fixtures:load
+```
 
 ### Start the container
 
@@ -15,19 +34,7 @@ In the root directory, run:
 docker-compose up
 `````
 
-### Update database
-
-The current database schema is in `sql/db.sql`. Additionally, Adminer is provided at `localhost:8080`
-to easily manage to database. You can either attach the database container and import the SQL file, or use the Adminer
-interface.
-
-### Optional: Seed database
-
-You may use the php container and run the create-* scripts inside the `bin` folder to seed the database with test data.
-
-### Run
-
-The application should be available at `http://nubium-sandbox.test`
+The application should be available at `http://bloggi-sandbox.test`
 
 ## Testing
 
