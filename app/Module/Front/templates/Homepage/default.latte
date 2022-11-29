@@ -39,7 +39,7 @@
 
     <nav class="blog-pagination my-5 d-flex align-items-center justify-content-center" aria-label="Pagination">
       {if !$paginator->isFirst()}
-        <div class="mr-3">
+        <div class="me-3">
           <a class="btn btn-sm btn-outline-dark ajax" n:href="default, 1">První</a>
           <a class="btn btn-sm btn-outline-dark ajax" n:href="default, $paginator->getPage() - 1">Předchozí</a>
         </div>
@@ -48,7 +48,7 @@
       <span>Stránka {$paginator->getPage()} z {$paginator->getPageCount()}</span>
 
 	    {if !$paginator->isLast()}
-        <div class="ml-3">
+        <div class="ms-3">
           <a class="btn btn-sm btn-outline-dark ajax" n:href="default, $paginator->getPage() + 1">Další</a>
           <a class="btn btn-sm btn-outline-dark ajax" n:href="default, $paginator->getPageCount()">Poslední</a>
         </div>
