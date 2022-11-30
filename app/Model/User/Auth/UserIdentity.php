@@ -19,7 +19,6 @@ class UserIdentity implements IIdentity
     $this->roles = [];
   }
 
-  // TODO: change mixed
   public function getId(): string
   {
     return $this->user->getId();

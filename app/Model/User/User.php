@@ -4,12 +4,13 @@ namespace App\Model\User;
 
 use App\Model\Database\Traits\TimestampableTrait;
 use App\Model\Database\Traits\UuidTrait;
+use App\Utils\Arrays\ArrayExpressible;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: "users")]
-class User
+class User extends ArrayExpressible
 {
   use UuidTrait;
   use TimestampableTrait;

@@ -5,6 +5,7 @@ namespace App\Model\Post;
 use App\Model\Database\Traits\TimestampableTrait;
 use App\Model\Database\Traits\UuidTrait;
 use App\Model\Post\Rating\PostRating;
+use App\Utils\Arrays\ArrayExpressible;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[ORM\Table(name: 'posts')]
-class Post
+class Post extends ArrayExpressible
 {
 
   use UuidTrait;
