@@ -2,7 +2,7 @@
 
 namespace App\Module\Security;
 
-use App\Model\Presenters\BaseTemplate;
+use App\Presenters\BaseTemplate;
 
 abstract class BaseSecurityTemplate extends BaseTemplate
 {

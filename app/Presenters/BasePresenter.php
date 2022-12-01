@@ -1,14 +1,15 @@
 <?php declare(strict_types = 1);
 
-namespace App\Model\Presenters;
+namespace App\Presenters;
 
 use App\Model\Database\EntityManager;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\Response;
 use Nette\Application\UI\Presenter;
-use App\Model\Presenters\Traits\Redraws;
-use App\Model\Presenters\Traits\ManagesUsers;
-use App\Model\Presenters\Traits\ManagesSnippets;
+use App\Presenters\Traits\Redraws;
+use App\Presenters\Traits\ManagesUsers;
+use App\Presenters\Traits\ManagesSnippets;
+use App\Presenters\Traits\UsesTemplating;
 use Nette\DI\Attributes\Inject;
 
 /**
@@ -19,17 +20,23 @@ class BasePresenter extends Presenter {
   use Redraws;
   use ManagesUsers;
   use ManagesSnippets;
+  use UsesTemplating;
 
   #[Persistent]
   public string $backlink = "";
+
+  #[Inject]
+  public EntityManager $em;
 
   public const DEFAULT_REDRAW = [
     "title",
     "content"
   ];
 
-  #[Inject]
-  public EntityManager $em;
+  protected function startup()
+  {
+    parent::startup();
+  }
 
   public function beforeRender(): void
   {

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Model\Presenters;
+namespace App\Presenters;
 
-use App\Model\Presenters\BasePresenter;
+use App\Presenters\BasePresenter;
 use App\Model\User\Auth\UserIdentity;
 use App\Model\User\User as LoggedUser;
 use Nette\Security\User;

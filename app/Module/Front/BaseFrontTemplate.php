@@ -2,7 +2,7 @@
 
 namespace App\Module\Front;
 
-use App\Model\Presenters\BaseTemplate;
+use App\Presenters\BaseTemplate;
 
 abstract class BaseFrontTemplate extends BaseTemplate
 {

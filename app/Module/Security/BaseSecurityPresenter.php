@@ -2,7 +2,7 @@
 
 namespace App\Module\Security;
 
-use App\Model\Presenters\BasePresenter;
+use App\Presenters\BasePresenter;
 use App\Module\Security\BaseSecurityTemplate;
 
 /**

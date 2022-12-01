@@ -2,7 +2,7 @@
 
 namespace App\Module\Admin;
 
-use App\Model\Presenters\BaseTemplate;
+use App\Presenters\BaseTemplate;
 
 abstract class BaseAdminTemplate extends BaseTemplate
 {

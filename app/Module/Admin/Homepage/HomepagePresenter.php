@@ -2,7 +2,7 @@
 
 namespace App\Module\Admin\Homepage;
 
-use App\Model\Presenters\Traits\RequiresAuth;
+use App\Presenters\Traits\RequiresAuth;
 use App\Module\Admin\BaseAdminPresenter;
 
 class HomepagePresenter extends BaseAdminPresenter {

@@ -1,9 +1,10 @@
 # Services injected into the Dependency-Injection container.
 
 services:
-	- App\Model\Router\RouterFactory::create
-	- App\Model\Security\Passwords(%security.hash%)
-	- App\Model\User\Auth\UserAuthenticator
+    router: App\Model\Router\RouterFactory::create
+    security.passwords: App\Model\Security\Passwords(%security.hash%)
+    security.authenticator: App\Model\User\Auth\UserAuthenticator
+    templating.helper: App\Templating\TemplateHelper(%templating.theme%, %templating.basePath%) 
 
 search:
     model:

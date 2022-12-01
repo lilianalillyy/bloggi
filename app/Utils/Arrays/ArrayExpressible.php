@@ -10,15 +10,6 @@ use function property_exists;
  * and for data to be filled from an array.
  */
 abstract class ArrayExpressible {
-  public function __serialize(): array
-  {
-    return $this->toArray();
-  }
-
-  public function __unserialize(array $data): void
-  {
-    $this->fromArray($data);
-  }
 
   /**
    * Converts the object to an array.

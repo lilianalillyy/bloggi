@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace App\Model\Presenters\Traits;
+namespace App\Presenters\Traits;
 
 use App\Model\User\Auth\UserIdentity;
 use App\Model\User\User;

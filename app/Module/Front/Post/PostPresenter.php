@@ -7,7 +7,7 @@ use App\Model\Post\PostFacade;
 use App\Model\Post\Rating\PostRating;
 use App\Model\Post\Rating\PostRatingFacade;
 use App\Model\Post\Rating\PostRatingKind;
-use App\Model\Presenters\Traits\RequiresAuth;
+use App\Presenters\Traits\RequiresAuth;
 use App\Module\Front\BaseFrontPresenter;
 
 /**
