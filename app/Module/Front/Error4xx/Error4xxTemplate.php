@@ -3,7 +3,7 @@
 namespace App\Module\Front\Error4xx;
 
 use App\Module\Front\BaseFrontTemplate;
-abstract class Error4xxTemplate extends BaseFrontTemplate
+class Error4xxTemplate extends BaseFrontTemplate
 {
   public int $code;
 

@@ -2,6 +2,7 @@
 
 namespace App\Module\Front\Error;
 
+use App\Templating\TemplateHelper;
 use Nette\Application\BadRequestException;
 use Nette\Application\Helpers;
 use Nette\Application\IPresenter;
@@ -20,7 +21,8 @@ final class ErrorPresenter implements IPresenter
   use SmartObject;
 
   public function __construct(
-    private readonly ILogger $logger
+    private readonly ILogger $logger,
+    private readonly TemplateHelper $templateHelper
   )
   {
   }
@@ -29,16 +31,17 @@ final class ErrorPresenter implements IPresenter
   {
     $exception = $request->getParameter('exception');
 
+    [$module, $presenter, $sep] = Helpers::splitName($request->getPresenterName());
+
     if ($exception instanceof BadRequestException) {
-      [$module, , $sep] = Helpers::splitName($request->getPresenterName());
       return new ForwardResponse($request->setPresenterName($module . $sep . 'Error4xx'));
     }
 
     $this->logger->log($exception, ILogger::EXCEPTION);
 
-    return new CallbackResponse(function (IRequest $request, IResponse $response): void {
+    return new CallbackResponse(function (IRequest $request, IResponse $response) use ($module, $presenter): void {
       if (str_contains($request->getHeader('Content-Type') ?? 'text/html', "text/html")) {
-        require __DIR__ . '/../templates/Error/500.phtml';
+        require $this->templateHelper->getThemeRoot() . "/$module/$presenter/500.phtml";
       }
     });
   }

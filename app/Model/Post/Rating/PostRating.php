@@ -6,11 +6,12 @@ use App\Model\Database\Traits\TimestampableTrait;
 use App\Model\Database\Traits\UuidTrait;
 use App\Model\Post\Post;
 use App\Model\User\User;
+use App\Utils\Arrays\ArrayExpressible;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PostRatingRepository::class)]
 #[ORM\Table(name: 'posts_ratings')]
-class PostRating
+class PostRating extends ArrayExpressible
 {
 
   use UuidTrait;

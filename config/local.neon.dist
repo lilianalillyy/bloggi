@@ -3,12 +3,16 @@ parameters:
 		host: localhost
 		port: 3306
 		dbname: bloggi
-		user: root
-		password:
+		user: bloggi
+		password: bloggi
 		driver: pdo_mysql
 
 	security:
-	  hash: argon2id
+		hash: argon2id
 
 	common:
-	  timezone: Europe/Prague
+		timezone: Europe/Prague
+
+	templating:
+		theme: default
+		basePath: %rootDir%/templates
