@@ -10,6 +10,7 @@ use App\Model\Auth\Form\RegisterFormFactory;
 use App\Model\User\Auth\UserIdentity;
 use App\Model\User\UserFacade;
 use App\Module\Security\BaseSecurityPresenter;
+use Exception;
 use Nette\Application\UI\Form;
 
 class AuthPresenter extends BaseSecurityPresenter
@@ -74,7 +75,7 @@ class AuthPresenter extends BaseSecurityPresenter
 
         $this->restoreRequest($this->backlink);
         $this->redirect(self::HOMEPAGE_REDIRECT);
-      } catch (AuthenticationException $e) {
+      } catch (Exception $e) {
         $this->flashMessage($e->getMessage(), "danger");
       }
     };

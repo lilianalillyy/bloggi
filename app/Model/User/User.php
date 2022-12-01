@@ -15,14 +15,14 @@ class User extends ArrayExpressible
   use UuidTrait;
   use TimestampableTrait;
 
-  #[ORM\Column(name: 'username', type: 'string', length: 32)]
+  #[ORM\Column(name: 'username', type: 'string', length: 32, unique: true)]
   private string $username;
 
   #[ORM\Column(length: 255, unique: true)]
   #[Gedmo\Slug(fields: ['username'])]
   private string $slug;
 
-  #[ORM\Column(name: 'email', type: 'string')]
+  #[ORM\Column(name: 'email', type: 'string', unique: true)]
   private string $email;
 
   #[ORM\Column(name: 'password', type: 'string')]

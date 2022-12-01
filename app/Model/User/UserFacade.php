@@ -6,6 +6,9 @@ use App\Exception\UnexpectedValueException;
 use App\Model\Auth\Form\Data\RegisterFormData;
 use App\Model\Database\EntityManager;
 use App\Model\Security\Passwords;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Exception;
+use RuntimeException;
 
 class UserFacade
 {
@@ -95,15 +98,28 @@ class UserFacade
    */
   public function create(RegisterFormData $data): User
   {
-    $user = (new User())
-      ->setUsername($data->username)
-      ->setPasswordHash($this->createPasswordHash($data->password))
-      ->setEmail($data->email);
+    if ($this->findOneBy([
+      'username' => $data->username,
+      'email' => $data->email
+    ])) {
+      throw new UnexpectedValueException("Uživatelské jméno nebo email je již používán.");
+    }
 
-    $this->em->persist($user);
+    try {
+      $user = (new User())
+        ->setUsername($data->username)
+        ->setPasswordHash($this->createPasswordHash($data->password))
+        ->setEmail($data->email);
 
-    // Immediately persist the user in the database.
-    $this->em->flush();
+      $this->em->persist($user);
+
+      // Immediately persist the user in the database.
+      $this->em->flush();
+    } catch (UniqueConstraintViolationException) {
+      throw new UnexpectedValueException("Uživatelské jméno nebo email je již používán.");
+    } catch (Exception) {
+      throw new RuntimeException("Nastala neznámá chyba.");
+    }
 
     return $user;
   }
