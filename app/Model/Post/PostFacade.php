@@ -21,7 +21,8 @@ class PostFacade
    * @param string $id
    * @return Post|null
    */
-  public function find(string $id): ?Post {
+  public function find(string $id): ?Post
+  {
     return $this->repository->find($id);
   }
 

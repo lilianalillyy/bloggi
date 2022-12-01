@@ -1,4 +1,4 @@
-<?php declare(strict_type = 1);
+<?php declare(strict_type=1);
 
 namespace App\Module\Security;
 
@@ -8,6 +8,7 @@ use App\Module\Security\BaseSecurityTemplate;
 /**
  * @property BaseSecurityTemplate $template
  */
-class BaseSecurityPresenter extends BasePresenter {
+class BaseSecurityPresenter extends BasePresenter
+{
 
 }

@@ -1,8 +1,9 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace App\Model\Auth\Form\Data;
 
-class RegisterFormData {
+class RegisterFormData
+{
 
   public function __construct(
     public string $username,
@@ -10,6 +11,7 @@ class RegisterFormData {
     public string $password,
     public string $repeatPassword
   )
-  {}
+  {
+  }
 
 }

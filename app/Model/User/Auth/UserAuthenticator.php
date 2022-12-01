@@ -13,7 +13,6 @@ use App\Model\User\UserFacade;
 use Nette\Security\Authenticator;
 use Nette\Security\IdentityHandler;
 use Nette\Security\IIdentity;
-use Nette\Security\SimpleIdentity;
 
 /**
  * The authenticator for the User entity.
@@ -23,7 +22,7 @@ class UserAuthenticator implements Authenticator, IdentityHandler
 
   public function __construct(
     private readonly UserFacade $userFacade,
-    private readonly Passwords  $passwords
+    private readonly Passwords $passwords
   )
   {
   }
@@ -46,7 +45,7 @@ class UserAuthenticator implements Authenticator, IdentityHandler
   }
 
   /**
-   * @param SimpleIdentity $identity
+   * @param UserIdentity $identity
    * @return IIdentity|null
    */
   public function wakeupIdentity(IIdentity $identity): ?IIdentity

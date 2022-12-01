@@ -1,16 +1,17 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace App\Presenters\Traits;
 
 use Nette\Application\UI\Presenter;
 
-trait RequiresAuth {
+trait RequiresAuth
+{
 
   use ManagesSnippets;
 
   public function injectRequiresAuth(): void
   {
-    $this->onStartup[] = fn (...$params) => $this->validateAuth(...$params);
+    $this->onStartup[] = fn(...$params) => $this->validateAuth(...$params);
   }
 
   private function validateAuth(): void

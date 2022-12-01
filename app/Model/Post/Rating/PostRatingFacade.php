@@ -22,7 +22,8 @@ class PostRatingFacade
    * @param string $id
    * @return PostRating|null
    */
-  public function find(string $id): ?PostRating {
+  public function find(string $id): ?PostRating
+  {
     return $this->repository->find($id);
   }
 

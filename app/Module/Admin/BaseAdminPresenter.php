@@ -1,4 +1,4 @@
-<?php declare(strict_type = 1);
+<?php declare(strict_type=1);
 
 namespace App\Module\Admin;
 
@@ -8,6 +8,7 @@ use App\Module\Admin\BaseAdminTemplate;
 /**
  * @property BaseAdminTemplate $template
  */
-class BaseAdminPresenter extends BasePresenter {
+class BaseAdminPresenter extends BasePresenter
+{
 
 }

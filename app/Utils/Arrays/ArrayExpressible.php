@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace App\Utils\Arrays;
 
@@ -9,7 +9,8 @@ use function property_exists;
  * Allows for the extending class to be converted to an array
  * and for data to be filled from an array.
  */
-abstract class ArrayExpressible {
+abstract class ArrayExpressible
+{
 
   /**
    * Converts the object to an array.

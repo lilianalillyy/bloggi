@@ -24,7 +24,8 @@ class UserFacade
    * @param string $id
    * @return User|null
    */
-  public function find(string $id): ?User {
+  public function find(string $id): ?User
+  {
     return $this->repository->find($id);
   }
 
@@ -77,7 +78,8 @@ class UserFacade
     return $user;
   }
 
-  public function updatePassword(User $user, string $oldPassword, string $newPassword): User {
+  public function updatePassword(User $user, string $oldPassword, string $newPassword): User
+  {
     if (!$this->passwords->verify($oldPassword, $user->getPasswordHash())) {
       throw new UnexpectedValueException("Staré heslo se neshoduje.");
     }
