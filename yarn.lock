@@ -3139,6 +3139,11 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+nette-forms@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/nette-forms/-/nette-forms-3.3.1.tgz#c8d0512d8a5d66a644ff9fcd700284acc4adf3c3"
+  integrity sha512-UOmA3rF+FjpSci5CGmMtsy79PMWCcl0yyfyCd8YXVS+c68FAnVq3ref5qSxYFcwFynTqcPsYKhsNh8eYW5nVhQ==
+
 node-forge@^1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-1.3.1.tgz#be8da2af243b2417d5f646a770663a92b7e9ded3"

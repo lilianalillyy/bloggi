@@ -1,51 +1,37 @@
-{block title}Registrace{/block}
+{block title}
+  Registrace
+{/block}
 
 {block content}
-<form
-  n:name="registerForm"
-  class="flex flex-col pt-3 md:pt-8"
->
-  <div class="flex flex-col pt-4">
-    <label n:name="username" class="text-lg">Uživatelské jméno</label>
-    <input
-      n:name="username"
-      class="appearance-none border w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:shadow-2xl focus:outline-none focus:shadow-outline transition duration-100 ease-in-out"
-    />
-  </div>
+  <form n:name="registerForm" class="form-signin w-100 m-auto">
+    {ifset title}
+        <h1 class="h3 mb-3 fw-normal">{include title}</h1>
+    {/ifset}
 
-  <div class="flex flex-col pt-4">
-    <label n:name="email" class="text-lg">Email</label>
-    <input
-      n:name="email"
-      class="appearance-none border w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:shadow-2xl focus:outline-none focus:shadow-outline transition duration-100 ease-in-out"
-    />
-  </div>
+    <div class="input-wrapper">
+      <div class="form-floating">
+        <input n:name="username" class="form-control" placeholder autofocus>
+        <label n:name="username">Uživatelské jméno</label>
+      </div>
 
-  <div class="flex flex-col pt-4">
-    <label n:name="password" class="text-lg">Heslo</label>
-    <input
-      n:name="password"
-      class="appearance-none border w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:shadow-2xl focus:outline-none focus:shadow-outline transition duration-100 ease-in-out"
-    />
-  </div>
+      <div class="form-floating">
+        <input n:name="email" class="form-control" placeholder>
+        <label n:name="email">Email</label>
+      </div>
 
-    <div class="flex flex-col pt-4">
-    <label n:name="repeatPassword" class="text-lg">Heslo znovu</label>
-    <input
-      n:name="repeatPassword"
-      class="appearance-none border w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:shadow-2xl focus:outline-none focus:shadow-outline transition duration-100 ease-in-out"
-    />
-  </div>
+      <div class="form-floating">
+        <input n:name="password" class="form-control" data-field="password" placeholder>
+        <label n:name="password">Heslo</label>
+      </div>
 
-  <button
-    n:name="submit"
-    class="bg-black border-2 border-black text-white font-bold text-lg p-2 mt-8"
-  >
-    Zaregistrovat se
-  </button>
-</form>
+      <div class="form-floating mb-4">
+        <input n:name="password" class="form-control" data-field="password" placeholder>
+        <label n:name="password">Heslo znovu</label>
+      </div>
+    </div>
 
-<div class="text-center pt-12 pb-12">
-    <p>Již máte účet? <a n:href=":login" class="ajax underline font-semibold">Přihlaste se.</a></p>
-</div>
+    <button n:name="submit" class="w-100 btn btn-lg btn-outline-primary mb-3">Zaregistrovat se</button>
+
+    <a n:href=":login" class="ajax text-muted">Přihlášení</a>
+  </form>
 {/block}
