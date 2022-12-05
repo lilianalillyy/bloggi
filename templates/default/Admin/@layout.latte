@@ -1,1 +1,71 @@
-layout a
+<!DOCTYPE html>
+<html lang="en" class="dashboard">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title n:snippet="title">
+      {ifset title}{include title|stripHtml} | {/ifset}Blog
+    </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{webpack commonModule.css}" />
+    <link rel="stylesheet" href="{webpack adminModule.css}" />
+  </head>
+
+  <body>
+    {include '@Layout/navbar.latte'}
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav
+          id="sidebarMenu"
+          class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
+        >
+          <div class="position-sticky pt-3 sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">
+                  <i data-feather="home"></i>
+                  Domovská stránka
+                </a>
+              </li>
+            </ul>
+
+            <h6
+              class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase"
+            >
+              <span>Přispěvky</span>
+              <a class="link-secondary" href="#" aria-label="Nový příspěvek">
+                <i data-feather="plus-circle"></i>
+              </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  Všechny příspěvky
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          {block content}
+        </main>
+      </div>
+    </div>
+
+    <script src="{webpack commonModule.js}"></script>
+    <script src="{webpack adminModule.js}"></script>
+  </body>
+</html>

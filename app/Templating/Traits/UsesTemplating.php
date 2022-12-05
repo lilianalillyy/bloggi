@@ -21,6 +21,7 @@ trait UsesTemplating
    */
   public function formatLayoutTemplateFiles(): array
   {
+    bdump("hello");
     if (preg_match('#/|\\\\#', (string) $this->layout)) {
       return [$this->layout];
     }
@@ -37,6 +38,8 @@ trait UsesTemplating
       "$themeRoot/$module/@$layout.latte",
       "$themeRoot/@$layout.latte"
     ]);
+
+    bdump($list);
 
     return $list;
   }

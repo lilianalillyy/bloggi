@@ -1,0 +1,46 @@
+<header
+  class="navbar front-bar navbar-dark fixed-bottom bg-dark flex-md-nowrap p-0 shadow"
+>
+  <span
+    class="navbar-brand me-0 px-3 fs-6"
+  >
+    <a n:href=":Admin:Dashboard:default" class="me-3 text-decoration-none text-light">Bloggi</a>
+
+    <a
+      n:href=":Admin:Post:list"
+      class="bar-item d-none d-md-inline-flex align-items-center me-3 text-light text-decoration-none"
+      data-bs-toggle="tooltip"
+      title="Příspěvky"
+    >
+      <i data-feather="archive"></i>
+    </a>
+
+    <a
+      n:href=":Admin:PostRating:list"
+      class="bar-item d-none d-md-inline-flex align-items-center me-3 text-light text-decoration-none"
+      data-bs-toggle="tooltip"
+      title="Hodnocení"
+    >
+      <i data-feather="star"></i>
+    </a>
+
+    <a
+      n:href=":Admin:User:list"
+      class="bar-item d-none d-md-inline-flex align-items-center text-light text-decoration-none"
+      data-bs-toggle="tooltip"
+      title="Uživatelé"
+    >
+      <i data-feather="user"></i>
+    </a>
+  </span>
+
+  <a
+    n:href=":Security:Auth:logout"
+    class="bar-item d-none d-md-inline-flex align-items-center me-3 text-light text-decoration-none"
+    data-bs-toggle="tooltip"
+    title="Odhlásit se"
+  >
+    <span class="me-3">Signed in as <b>{$loggedUser->getUsername()}</b></span>
+    <i data-feather="log-out"></i>
+  </a>
+</header>

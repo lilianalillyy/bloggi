@@ -58,7 +58,7 @@ final class RouterFactory
   {
     $frontRouter = new RouteList('Admin');
 
-    $frontRouter->addRoute('admin/<presenter>/<action>[/<id>]', 'Homepage:default');
+    $frontRouter->addRoute('admin/<presenter>/<action>[/<id>]', 'Dashboard:default');
 
     return $frontRouter;
   }
