@@ -16,7 +16,7 @@ class PostRatingFacade
     public readonly EntityManager $em
   )
   {
-    $this->repository = $em->postRating();
+    $this->repository = $em->getRepository(PostRating::class);
   }
 
   /**
@@ -65,18 +65,21 @@ class PostRatingFacade
 
   public function ratePost(Post $post, User $user, PostRatingKind $kind): ?PostRating
   {
-    return $this->em->transactional(function (EntityManager $em) use ($post, $user, $kind) {
-      $qb = $em->postRating()
+    $repository = $this->repository;
+    return $this->em->transactional(function () use ($post, $user, $kind, $repository) {
+      $qb = $repository
         ->createQueryBuilder('pr')
-        ->where([
-          'post' => $post,
-          'user' => $user
+        ->where('pr.post = :post')
+        ->andWhere('pr.user = :user')
+        ->setParameters([
+          "post" => $post->getId(),
+          "user" => $user->getId(),
         ]);
 
       /** @var PostRating $rating */
       $rating = $qb->getQuery()
           ->setLockMode(LockMode::PESSIMISTIC_WRITE)
-          ->getResult();
+          ->getSingleResult();
   
       // If asked to rate post and the same rating already exists, remove rating.
       if ($rating && $rating->kind === $kind) {
