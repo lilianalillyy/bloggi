@@ -51,7 +51,7 @@ class AuthPresenter extends BaseSecurityPresenter
 
         $this->restoreRequest($this->backlink);
         $this->redirect(self::HOMEPAGE_REDIRECT);
-      } catch (AuthenticationException $e) {
+      } catch (Exception $e) {
         $this->flashMessage($e->getMessage(), "danger");
       }
     };

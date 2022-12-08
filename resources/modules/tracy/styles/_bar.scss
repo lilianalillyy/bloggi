@@ -1,0 +1,113 @@
+div#tracy-debug-bar {
+    font-family: Karla, sans-serif;
+    background: #fff;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    border-radius: 0;
+}
+
+#tracy-debug-bar .tracy-row li {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#tracy-debug-bar li>a, #tracy-debug-bar li>span {
+    padding: 0.6em;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 200ms ease-in-out;
+}
+
+#tracy-debug-logo svg {
+    margin: 0.6em;
+    width: 4em;
+}
+
+#tracy-debug-bar li>a[data-tracy-action="close"] {
+    /* font-size: 1.5em; */
+    /* position: absolute; */
+    /* line-height: 0; */
+    /* letter-spacing: 0; */
+    /* width: fit-content; */
+}
+
+#tracy-debug-bar li>a:hover {
+    background: #e5e7eb;
+}
+
+#tracy-debug .tracy-panel {
+    font-family: Karla, sans-serif;
+    border-radius: 0;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+#tracy-debug h1 {
+    font-family: Karla, sans-serif;
+    font-weight: 600;
+    font-size: 1.7em;
+}
+
+#tracy-debug tr:nth-child(2n) td {
+    background: #e5e7eb;
+}
+
+#tracy-debug td, #tracy-debug th {
+    border: 1px solid #f3f4f6;
+}
+
+.tracy-dump.tracy-light {
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 0;
+}
+
+#tracy-debug table {
+    /* border-radius: 8px; */
+}
+
+#tracy-debug table {
+    background: #f3f4f6;
+}
+
+.tracy-dbal-sql > strong[style="color:#2D44AD"] {
+    color: #2563eb !important;
+}
+
+#tracy-debug .nette-ContainerPanel .yes {
+    color: #16a34a;
+}
+
+.tracy-light .tracy-dump-array, .tracy-light .tracy-dump-object {
+    color: #ef4444;
+}
+
+tracy-div:not(a b) .tracy-dump-array, tracy-div:not(a b) .tracy-dump-object {
+    color:  #ef4444;
+}
+
+#tracy-debug a:hover, #tracy-debug a:focus {
+    background-color: transparent;
+    color: #0369a1;
+    border-bottom: 1px solid #0369a1;
+}
+
+#tracy-debug a {
+    color: #0369a1;
+}
+
+#tracy-debug .nette-RoutingPanel tr {
+    border: none;
+}
+
+#tracy-debug .nette-RoutingPanel .yes td {
+    background: rgb(34 197 94 / 25%) !important;
+}
+
+#tracy-debug .nette-RoutingPanel .may td {
+    background: rgb(14 165 233 / 25%);
+}
+
+.tracy-light .tracy-dump-null, .tracy-light .tracy-dump-bool {
+    color: #f97316;
+}

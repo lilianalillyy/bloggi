@@ -1,0 +1,133 @@
+@keyframes tracy-row-flash-light {
+  0% {
+    background: #9ca3af;
+  }
+}
+
+tracy-div#tracy-debug {
+
+  div#tracy-debug-bar {
+    font-family: Karla, sans-serif;
+    background: #fff;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border-radius: 0;
+    // Use box-shadow to create a border inside the bar, not outside
+    border: 0;
+    box-shadow: 0px 0px 0px 2px #e5e7eb inset;
+
+    .tracy-row {
+      &[data-tracy-group="ajax"],
+      &[data-tracy-group="redirect"] {
+        background: #d1d5db;
+        animation: tracy-row-flash-light 200ms ease-in-out;
+      }
+
+      li {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+        & > a,
+        & > span {
+          padding: 0.6em;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          transition: background 200ms ease-in-out;
+        }
+
+        & > a:hover {
+          background: #e5e7eb;
+        }
+
+        #tracy-debug-logo svg {
+          margin: 0.6em;
+          width: 4em;
+        }
+      }
+    }
+  }
+
+  a {
+    border-bottom: 2px solid transparent !important;
+  }
+
+  a:hover,
+  a:focus {
+    background-color: transparent !important;
+    color: #0369a1 !important;
+    border-bottom: 2px solid #0369a1 !important;
+  }
+
+  &:not(a b) .tracy-dump-array,
+  &:not(a b) .tracy-dump-object {
+    color: #ef4444;
+  }
+
+  .tracy-panel {
+    font-family: Karla, sans-serif;
+    border-radius: 0;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+    h1 {
+      font-family: Karla, sans-serif;
+      font-weight: 600;
+      font-size: 1.7em;
+    }
+
+    table {
+      background: #f3f4f6;
+
+      tr:nth-child(2n) td {
+        background: #e5e7eb;
+      }
+
+      td,
+      th {
+        border: 1px solid #f3f4f6;
+        padding: 0.4em;
+      }
+    }
+
+    .tracy-dump.tracy-light {
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 0;
+    }
+
+    .tracy-dbal-sql > strong[style="color:#2D44AD"] {
+      color: #2563eb !important;
+    }
+
+    .nette-ContainerPanel .yes {
+      color: #16a34a;
+    }
+
+    .tracy-light .tracy-dump-array,
+    .tracy-light .tracy-dump-object {
+      color: #ef4444;
+    }
+
+    .nette-RoutingPanel {
+      tr {
+        border: none !important;
+      }
+      .yes td {
+        background: rgba(34, 197, 94, 0.25) !important;
+      }
+      .may td {
+        background: rgba(14, 165, 233, 0.25);
+      }
+
+      .tracy-dump.tracy-light {
+        background: transparent;
+        border: none;
+      }
+    }
+
+    .tracy-light .tracy-dump-null,
+    .tracy-light .tracy-dump-bool {
+      color: #f97316;
+    }
+  }
+}
