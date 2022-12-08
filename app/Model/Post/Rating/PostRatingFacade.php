@@ -6,6 +6,7 @@ use App\Model\Database\EntityManager;
 use App\Model\Post\Post;
 use App\Model\User\User;
 use Doctrine\DBAL\LockMode;
+use Doctrine\ORM\NoResultException;
 
 class PostRatingFacade
 {
@@ -65,40 +66,41 @@ class PostRatingFacade
 
   public function ratePost(Post $post, User $user, PostRatingKind $kind): ?PostRating
   {
-    $repository = $this->repository;
-    return $this->em->transactional(function () use ($post, $user, $kind, $repository) {
-      $qb = $repository
-        ->createQueryBuilder('pr')
-        ->where('pr.post = :post')
-        ->andWhere('pr.user = :user')
-        ->setParameters([
-          "post" => $post->getId(),
-          "user" => $user->getId(),
-        ]);
+    $this->em->beginTransaction();
+    
+    $qb = $this->repository
+    ->createQueryBuilder('pr')
+    ->where('pr.post = :post')
+    ->andWhere('pr.user = :user')
+    ->setParameters([
+      "post" => $post->getId(),
+      "user" => $user->getId(),
+    ]);
 
+    try {
       /** @var PostRating $rating */
       $rating = $qb->getQuery()
-          ->setLockMode(LockMode::PESSIMISTIC_WRITE)
-          ->getSingleResult();
-  
+      ->setLockMode(LockMode::PESSIMISTIC_WRITE)
+      ->getSingleResult();
+
       // If asked to rate post and the same rating already exists, remove rating.
       if ($rating && $rating->kind === $kind) {
         $this->em->remove($rating);
+        $this->em->commit();
         return null;
       }
-  
-      if (!$rating) {
-        $rating = (new PostRating())
-          ->setPost($post)
-          ->setUser($user);
-      }
-  
-      $rating->setKind($kind);
-  
-      $this->em->persist($rating);
-  
-      return $rating;
-    });
+    } catch (NoResultException) {
+      $rating = (new PostRating())
+      ->setPost($post)
+      ->setUser($user);
+    }
+
+    $rating->setKind($kind);
+
+    $this->em->persist($rating);
+    $this->em->commit();
+
+    return $rating;
   }
 
 }
