@@ -19,4 +19,34 @@
       </div>
     </div>
   </div>
+
+  <div class="row d-grid gap-3 m-1 border-start ps-4">
+    <div class="col p-0">
+      <h3>Komentáře</h3>
+    </div>
+
+    {if $loggedUser}
+      <div class="col col-md-10 col-lg-8 rounded p-3 bg-light border">
+        {control commentForm}
+      </div>
+    {else}
+      <div class="col col-md-10 col-lg-8 d-flex justify-content-between align-items-center rounded p-3 bg-light border">
+        <span>K přidání komentáře musíte být přihlášeni.</span>
+        <span class="d-inline-flex gap-1">
+          <a n:href=":Security:Auth:login" class="btn btn-md btn-primary">Přihlášení</a>
+          <a n:href=":Security:Auth:register" class="btn btn-md btn-outline-primary">Registrace</a>
+        </span>
+      </div>
+    {/if}
+
+    {foreach $comments as $comment}
+      <div class="col col-md-10 col-lg-8 rounded p-3 bg-light border">
+        <div class="d-flex justify-content-between align-items-center">
+          <h6>{$comment->getUser()->getUsername()}</h6>
+          <p class="mb-0 text-muted">{$comment->getCreatedAt()|date}</p>
+        </div>
+        <p class="mb-0">{$comment->getContent()}</p>
+      </div>
+    {/foreach}
+  </div>
 {/block}

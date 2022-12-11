@@ -4,6 +4,7 @@ namespace App\Model\Post;
 
 use App\Model\Database\Traits\TimestampableTrait;
 use App\Model\Database\Traits\UuidTrait;
+use App\Model\Post\Comment\PostComment;
 use App\Model\Post\Rating\PostRating;
 use App\Utils\Arrays\ArrayExpressible;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -37,6 +38,12 @@ class Post extends ArrayExpressible
    */
   #[ORM\OneToMany(mappedBy: 'post', targetEntity: PostRating::class)]
   private Collection $ratings;
+
+  /**
+   * @var Collection<string, PostComment>
+   */
+  #[ORM\OneToMany(mappedBy: 'post', targetEntity: PostComment::class)]
+  private Collection $comments;
 
   public function __construct()
   {
@@ -124,12 +131,30 @@ class Post extends ArrayExpressible
   }
 
   /**
-   * @param Collection $ratings
+   * @param Collection<string, PostRating> $ratings
    * @return Post
    */
   public function setRatings(Collection $ratings): Post
   {
     $this->ratings = $ratings;
+    return $this;
+  }
+
+  /**
+   * @return Collection<string, PostComment>
+   */
+  public function getComments(): Collection
+  {
+    return $this->comments;
+  }
+
+  /**
+   * @param Collection<string, PostComment> $comments
+   * @return Post
+   */
+  public function setComments(Collection $comments): Post
+  {
+    $this->comments = $comments;
     return $this;
   }
 

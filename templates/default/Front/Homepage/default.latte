@@ -28,7 +28,7 @@
         {foreach $posts as $post}
           <article class="blog-post">
             <h2 class="blog-post-title mb-1"><a n:href="Post:view $post->getId()" class="ajax">{$post->getTitle()}</a></h2>
-            <p class="blog-post-meta">{$post->getCreatedAt()->format("d.m.Y H:i")}</p>
+            <p class="blog-post-meta">{$post->getCreatedAt()|date}</p>
             <p>{$post->getPerex()}</p>
             <hr>
             <p>{$post->getContent()|truncate:256}</p>
