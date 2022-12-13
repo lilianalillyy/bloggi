@@ -33,7 +33,8 @@
     "nettrine/migrations": "^0.8.0",
     "ramsey/uuid-doctrine": "^1.8",
     "gedmo/doctrine-extensions": "^3.10",
-    "contributte/webpack": "^2.2"
+    "contributte/webpack": "^2.2",
+    "nette/safe-stream": "^3.0"
   },
   "scripts": {
     "post-install-cmd": [
