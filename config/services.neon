@@ -4,8 +4,8 @@ services:
     router: App\Model\Router\RouterFactory::create
     security.passwords: App\Model\Security\Passwords(%security.hash%)
     security.authenticator: App\Model\User\Auth\UserAuthenticator
-    templating.helper: App\Templating\TemplateHelper(%templating.theme%, %templating.basePath%) 
-    neon.configurator = App\Config\Neon\NeonConfigurator(%rootDir%/config)
+    templating.helper: App\Templating\TemplateHelper(%templating.theme%, %templating.basePath%)
+    configurator.neon: App\Config\Neon\NeonConfigurator(%rootDir%/config)
 
 search:
     model:
@@ -14,3 +14,8 @@ search:
             - *Facade
             - *Factory
             - *Router
+            - *Manager
+    setup:
+      in: %appDir%/Setup
+      classes:
+        - *Setup

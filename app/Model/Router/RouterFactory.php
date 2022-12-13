@@ -31,6 +31,7 @@ final class RouterFactory
 
     $router->add(self::createAdminRouter());
     $router->add(self::createSecurityRouter());
+    $router->add(self::createSetupRouter());
     $router->add(self::createFrontRouter());
 
     return $router;
@@ -59,6 +60,15 @@ final class RouterFactory
     $frontRouter = new RouteList('Admin');
 
     $frontRouter->addRoute('admin/<presenter>/<action>[/<id>]', 'Dashboard:default');
+
+    return $frontRouter;
+  }
+
+  private static function createSetupRouter(): RouteList
+  {
+    $frontRouter = new RouteList('Setup');
+
+    $frontRouter->addRoute('setup/<presenter>/<action>[/<id>]', 'Database:default');
 
     return $frontRouter;
   }

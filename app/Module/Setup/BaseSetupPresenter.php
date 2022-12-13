@@ -1,7 +1,19 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
-class BaseSetupPresenter {
+namespace App\Module\Setup;
 
-    
+use Nette\Application\UI\Presenter;
+
+/**
+ * @property BaseSetupTemplate $template
+ */
+class BaseSetupPresenter extends Presenter
+{
+
+  public function startup() {
+    parent::startup();
+
+    // TODO: lock check
+  }
 
 }
