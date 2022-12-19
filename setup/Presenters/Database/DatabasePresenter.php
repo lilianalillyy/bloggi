@@ -33,7 +33,6 @@ class DatabasePresenter extends BaseSetupPresenter {
         $this->databaseConfigManager->setup($data);
         $this->redirect(":migrate");
       } catch (RuntimeException $e) {
-        bdump($e);
         $this->flashMessage($e->getMessage(), 'danger');
       }
     };
@@ -50,9 +49,9 @@ class DatabasePresenter extends BaseSetupPresenter {
         $connection = $this->connectionFactory->createFromConfig();
         $migrationManager = $this->migrationManagerFactory->create($connection);
 
-        $latest = $migrationManager->resolveVersionAlias('latest');     
+        $version = $migrationManager->resolveVersionAlias('latest');     
+        $migrationManager->migrate($version, $migrationManager->getMigratorConfiguration());
       } catch (Exception $e) {
-        bdump($e);
         $this->flashMessage($e->getMessage(), 'danger');
       }
     };
