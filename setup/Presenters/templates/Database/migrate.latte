@@ -1,0 +1,15 @@
+{block title}
+  Schéma databáze
+{/block}
+
+{block content}
+<form n:name="migrationForm" class="form-signin w-100 m-auto">
+    {ifset title}
+        <h1 class="h3 mb-3 fw-normal">{include title}</h1>
+    {/ifset}
+
+    <p>Připojení k databázi bylo úspěšné. Jste připraveni vytvořit databázové schéma Bloggi? Tato akce je nevratná a smaže existující data v databázi.</p>    
+
+    <button n:name="submit" class="w-100 btn btn-lg btn-outline-primary mb-3">Vytvořit</button>
+</form>
+{/block}

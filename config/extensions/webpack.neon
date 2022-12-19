@@ -1,0 +1,11 @@
+extensions:
+    webpack: Contributte\Webpack\DI\WebpackExtension(%debugMode%, %consoleMode%)
+
+webpack:
+	build:
+		directory: %wwwDir%/build
+		publicPath: build/
+	devServer:
+		enabled: %debugMode%
+		url: http://localhost:8080/build
+		timeout: 0.1

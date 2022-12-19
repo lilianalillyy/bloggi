@@ -1,0 +1,4 @@
+services:
+    router: App\Model\Router\RouterFactory::create
+    security.passwords: App\Model\Security\Passwords(%security.hash%)
+    security.authenticator: App\Model\User\Auth\UserAuthenticator

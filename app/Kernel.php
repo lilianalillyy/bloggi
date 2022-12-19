@@ -7,8 +7,6 @@
  */
 namespace App;
 
-use Contributte\Bootstrap\ExtraConfigurator;
-
 /**
  * The kernel of the CMS.
  */
@@ -19,28 +17,26 @@ class Kernel
    * This array includes all configuration files that will be loaded.
    * These configuration files are in the /config directory.
    *
-   * @var string[]
+   * @var <(BootMode|string)|string[]>[]
    */
   protected static array $configs = [
-    "local",
-    "common",
-    "services",
-    "extensions"
+    "common" => [
+      "local",
+      "config",
+    ],
+    "cli" => [
+      "cli/extensions",
+      "cli/services",
+    ],
+    "web" => [
+      "web/extensions",
+      "web/services",
+    ]
   ];
 
-  public static function boot(): ExtraConfigurator
+  public static function boot(BootMode $bootMode = BootMode::Web): Configurator
   {
-    $configurator = new ExtraConfigurator();
-
-    $appDir = __DIR__;
-    $rootDir = realpath($appDir . "/..");
-    $wwwDir = realpath($rootDir . "/www");
-
-    $configurator->addParameters([
-      "appDir" => $appDir,
-      "rootDir" => $rootDir,
-      "wwwDir" => $wwwDir
-    ]);
+    $configurator = new Configurator();
 
     /**
      * This sets the environment mode based on the NETTE_DEBUG environment.
@@ -48,21 +44,22 @@ class Kernel
      */
     $configurator->setEnvDebugMode();
 
-    $configurator->enableTracy($rootDir . '/log');
+    $configurator->enableTracy($configurator->getRootDir() . '/log');
     $configurator->setTimeZone('Europe/Prague');
-    $configurator->setTempDirectory($rootDir . '/temp');
+    $configurator->setTempDirectory($configurator->getRootDir() . '/temp');
 
     $configurator->createRobotLoader()
       ->addDirectory(__DIR__)
       ->register();
 
-    /**
-     * Load configuration files.
-     */
-    foreach (self::$configs as $config) {
-      $configurator->addConfig($rootDir . "/config/$config.neon");
-    }
+    $configurator->loadConfigs(self::getConfigsForBootMode("common"));
+    $configurator->loadConfigs(self::getConfigsForBootMode($bootMode));
 
     return $configurator;
+  }
+
+  private static function getConfigsForBootMode(BootMode|string $bootMode): array
+  {
+    return self::$configs[is_string($bootMode) ? $bootMode : $bootMode->value] ?? [];
   }
 }

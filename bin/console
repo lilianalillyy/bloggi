@@ -1,9 +1,11 @@
 #!/usr/bin/env php
 <?php declare(strict_types=1);
 
+use App\BootMode;
+
 require __DIR__ . '/../vendor/autoload.php';
 
-$configurator = App\Kernel::boot();
+$configurator = App\Kernel::boot(BootMode::Cli);
 $container = $configurator->createContainer();
 
 $container->getByType(Symfony\Component\Console\Application::class)->run();

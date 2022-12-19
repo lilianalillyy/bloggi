@@ -1,0 +1,12 @@
+search:
+    model:
+        in: %appDir%/Model
+        classes:
+            - *Facade
+            - *Factory
+            - *Router
+            - *Manager
+        exclude:
+            classes:
+            # EntityManager is registered by Nettrine
+            - App\Model\Database\EntityManager

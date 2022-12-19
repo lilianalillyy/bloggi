@@ -1,0 +1,3 @@
+services:
+    templating.helper: App\Templating\TemplateHelper(%templating.theme%, %templating.basePath%)
+    writer: App\Config\Neon\NeonWriter(%rootDir%/config)

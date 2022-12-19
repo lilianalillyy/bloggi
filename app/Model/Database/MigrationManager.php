@@ -4,7 +4,6 @@ namespace App\Model\Database;
 
 use Doctrine\Migrations\DependencyFactory;
 use Doctrine\Migrations\MigratorConfiguration;
-use Doctrine\Migrations\Version\Direction;
 use Doctrine\Migrations\Version\Version;
 use Symfony\Component\Console\Input\ArrayInput;
 use Doctrine\Migrations\Query\Query;
@@ -12,7 +11,6 @@ use Doctrine\Migrations\Query\Query;
 class MigrationManager {
 
     public function __construct(
-        private EntityManager $em,
         private DependencyFactory $dependencyFactory
     ) {
     }

@@ -1,0 +1,46 @@
+{block title}
+  Konfigurace databáze
+{/block}
+
+{block content}
+<form n:name="databaseConfigForm" class="form-signin w-100 m-auto">
+    {ifset title}
+        <h1 class="h3 mb-3 fw-normal">{include title}</h1>
+    {/ifset}
+
+    <select n:name="driver" class="form-select mb-4" >   
+    </select>
+
+    <div class="input-wrapper">
+        <div class="form-floating">
+            <input n:name="host" class="form-control" data-field="hostname" placeholder autofocus>
+            <label n:name="host">Host</label>
+        </div>
+        <div class="form-floating">
+            <input n:name="port" class="form-control" data-field="port" placeholder autofocus>
+            <label n:name="port">Port</label>
+        </div>
+    </div>
+
+    <div class="input-wrapper">
+      <div class="form-floating">
+        <input n:name="user" class="form-control" data-field="username" placeholder autofocus>
+        <label n:name="user">Uživatelské jméno</label>
+      </div>
+
+      <div class="form-floating">
+        <input n:name="password" class="form-control" data-field="password" placeholder autofocus>
+        <label n:name="password">Heslo</label>
+      </div>
+    </div>
+
+    <div class="input-wrapper mb-4">
+        <div class="form-floating">
+            <input n:name="databaseName" class="form-control" data-field="databaseName" placeholder autofocus>
+            <label n:name="databaseName">Jméno databáze</label>
+        </div>
+    </div>
+
+    <button n:name="submit" class="w-100 btn btn-lg btn-outline-primary mb-3">Připojení k databázi</button>
+</form>
+{/block}

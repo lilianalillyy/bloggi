@@ -1,11 +1,5 @@
 parameters:
 	database:
-		host: localhost
-		port: 3306
-		dbname: bloggi
-		user: bloggi
-		password: bloggi
-		driver: pdo_mysql
 
 	security:
 		hash: argon2id

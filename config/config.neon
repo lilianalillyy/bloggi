@@ -1,0 +1,32 @@
+application:
+    errorPresenter: Front:Error
+    mapping:
+        *: ['App\Module', '*', '*\*Presenter']
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+tracy:
+    dumpTheme: dark
+
+php:
+	date.timezone: %common.timezone%
+	output_buffering: 4096
+
+session:
+	autoStart: smart
+	cookieHttponly: true
+	cookieSamesite: Lax
+	debugger: false
+	expiration: 1 year
+	name: bloggi_session
+	sidBitsPerCharacter: 6 # 4-6
+	sidLength: 128 # 22-250
+	useCookies: true
+	useOnlyCookies: true
+	useStrictMode: true
+
+http:
+	cookieSecure: auto

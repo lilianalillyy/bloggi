@@ -1,0 +1,53 @@
+extensions: 
+    nettrine.annotations: Nettrine\Annotations\DI\AnnotationsExtension
+    nettrine.cache: Nettrine\Cache\DI\CacheExtension
+    nettrine.migrations: Nettrine\Migrations\DI\MigrationsExtension
+    nettrine.fixtures: Nettrine\Fixtures\DI\FixturesExtension
+    nettrine.extensions.gedmo: App\DI\Doctrine\BehaviorsExtension
+    nettrine.dbal: Nettrine\DBAL\DI\DbalExtension
+    nettrine.dbal.console: Nettrine\DBAL\DI\DbalConsoleExtension
+    nettrine.orm: Nettrine\ORM\DI\OrmExtension
+    nettrine.orm.cache: Nettrine\ORM\DI\OrmCacheExtension
+    nettrine.orm.console: Nettrine\ORM\DI\OrmConsoleExtension
+    nettrine.orm.annotations: Nettrine\ORM\DI\OrmAttributesExtension
+    
+nettrine.dbal:
+	debug:
+		panel: %debugMode%
+	connection:
+		driver: %database.driver%
+		host: %database.host%
+		user: %database.user%
+		password: %database.password%
+		dbname: %database.dbname%
+		port: %database.port%
+		types:
+		   uuid: Ramsey\Uuid\Doctrine\UuidType
+
+nettrine.extensions.gedmo:
+  timestampable: true
+  sluggable: true
+
+nettrine.orm:
+	entityManagerDecoratorClass: App\Model\Database\EntityManager
+	configuration:
+		autoGenerateProxyClasses: %debugMode%
+
+nettrine.orm.annotations:
+	mapping:
+		App\Model: %appDir%/Model
+
+nettrine.orm.cache:
+
+nettrine.cache:
+
+nettrine.migrations:
+	table: doctrine_migrations
+	column: version
+	directory: %rootDir%/db/Migrations
+	namespace: Database\Migrations
+	versionsOrganization: null
+
+nettrine.fixtures:
+	paths:
+		- %rootDir%/db/Fixtures

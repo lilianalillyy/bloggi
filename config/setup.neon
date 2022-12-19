@@ -1,0 +1,20 @@
+search:
+    in: %setupDir%/Model
+    classes:
+        - *Manager
+        - *Factory
+        - *Form
+
+services:
+    writer: App\Config\Neon\NeonWriter(%rootDir%/config)
+    router: BloggiSetup\Model\Router\SetupRouter::create()
+    connectionFactory: BloggiSetup\Model\Database\ConnectionFactory(%database%)
+
+application:
+    errorPresenter: Error:Error
+    mapping:
+        *: ['BloggiSetup', 'Presenters', '*\*Presenter']
+
+includes:
+    - extensions/webpack.neon
+    - local.neon
