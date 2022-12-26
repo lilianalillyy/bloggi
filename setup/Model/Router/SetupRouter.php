@@ -10,7 +10,7 @@ class SetupRouter
     {
         $router = new RouteList('Setup');
 
-        $router->addRoute('setup/<presenter>/<action>', 'Database:default');
+        $router->addRoute('setup/<presenter>/<action>', 'DatabaseConfig:default');
 
         return $router;
     }

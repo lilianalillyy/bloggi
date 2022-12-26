@@ -27,6 +27,7 @@ class UserPresenter extends BaseFrontPresenter
     parent::__construct();
   }
 
+  // TODO: refactor
   public function createComponentPasswordForm(): Form
   {
     $form = $this->passwordFormFactory->create();
@@ -36,12 +37,6 @@ class UserPresenter extends BaseFrontPresenter
 
       $oldPassword = $values["oldPassword"];
       $newPassword = $values["newPassword"];
-
-      // Check whether the new passwords match.
-      if ($newPassword !== $values["newPasswordRepeat"]) {
-        $this->flashMessage('Nové heslo se neshoduje.', 'danger');
-        return;
-      }
 
       try {
         $this->userFacade->updatePassword($this->getUserIdentity()->getUser(), $oldPassword, $newPassword);

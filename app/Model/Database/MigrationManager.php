@@ -15,6 +15,10 @@ class MigrationManager {
     ) {
     }
 
+    public function ensureInitializedMetadata() {
+        return $this->dependencyFactory->getMetadataStorage()->ensureInitialized();
+    }
+
     /**
      * Create a migrator configuration
      */

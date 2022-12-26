@@ -7,10 +7,10 @@ use Contributte\FormsBootstrap\Enums\BootstrapVersion;
 use Contributte\FormsBootstrap\Enums\RenderMode;
 use Nette\Application\UI\Form;
 
-class MigrationForm
+class DatabaseMigrationForm
 {
 
-  public static function create(): Form
+  public function create(): Form
   {
     $form = new BootstrapForm;
 

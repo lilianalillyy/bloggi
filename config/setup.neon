@@ -1,3 +1,6 @@
+parameters:
+	modelDir: %appDir%/Model
+
 search:
     in: %setupDir%/Model
     classes:
@@ -8,7 +11,8 @@ search:
 services:
     writer: App\Config\Neon\NeonWriter(%rootDir%/config)
     router: BloggiSetup\Model\Router\SetupRouter::create()
-    connectionFactory: BloggiSetup\Model\Database\ConnectionFactory(%database%)
+    registerFormFactory: App\Model\Auth\Form\RegisterFormFactory
+    databaseConfigManager: BloggiSetup\Model\Database\DatabaseConfigManager(database: %database%)
 
 application:
     errorPresenter: Error:Error

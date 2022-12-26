@@ -10,7 +10,11 @@ extensions:
     nettrine.orm.cache: Nettrine\ORM\DI\OrmCacheExtension
     nettrine.orm.console: Nettrine\ORM\DI\OrmConsoleExtension
     nettrine.orm.annotations: Nettrine\ORM\DI\OrmAttributesExtension
-    
+
+services:
+	migrationManager: App\Model\Database\MigrationManager
+	schemaManager: @nettrine.dbal.connection::createSchemaManager
+
 nettrine.dbal:
 	debug:
 		panel: %debugMode%
@@ -35,7 +39,7 @@ nettrine.orm:
 
 nettrine.orm.annotations:
 	mapping:
-		App\Model: %appDir%/Model
+		App\Model: %modelDir%
 
 nettrine.orm.cache:
 

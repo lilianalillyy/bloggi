@@ -1,0 +1,37 @@
+{block title}
+  Vytvoření prvního uživatele
+{/block}
+
+{block content}
+  <form n:name="registerForm" class="form-signin w-100 m-auto">
+    {ifset title}
+        <h1 class="h3 mb-3 fw-normal">{include title}</h1>
+    {/ifset}
+
+    <div class="input-wrapper">
+      <div class="form-floating">
+        <input n:name="username" class="form-control" placeholder autofocus>
+        <label n:name="username">Uživatelské jméno</label>
+      </div>
+
+      <div class="form-floating">
+        <input n:name="email" class="form-control" placeholder>
+        <label n:name="email">Email</label>
+      </div>
+    </div>
+
+    <div class="input-wrapper">
+      <div class="form-floating">
+        <input n:name="password" class="form-control" data-field="password" placeholder>
+        <label n:name="password">Heslo</label>
+      </div>
+
+      <div class="form-floating mb-4">
+        <input n:name="repeatPassword" class="form-control" data-field="password" placeholder>
+        <label n:name="repeatPassword">Heslo znovu</label>
+      </div>
+    </div>
+
+    <button n:name="submit" class="w-100 btn btn-lg btn-outline-primary mb-3">Vytvořit uživatele</button>
+  </form>
+{/block}

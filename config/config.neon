@@ -8,6 +8,9 @@ di:
 		parameters: no
 		tags: no
 
+parameters:
+	modelDir: %appDir%/Model
+
 tracy:
     dumpTheme: dark
 

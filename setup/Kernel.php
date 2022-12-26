@@ -20,7 +20,13 @@ class Kernel {
           ->addDirectory(__DIR__)
           ->register();    
 
-        $configurator->loadConfigs(["setup"]);
+        $configurator->loadConfigs([
+          "extensions/nettrine", 
+          "services/models",
+          "services/nette",
+          "services/utils",
+          "setup", 
+        ]);
 
         return $configurator;
     }

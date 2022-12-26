@@ -11,7 +11,7 @@ use Nette\Forms\Controls\BaseControl;
 class DatabaseConfigForm
 {
 
-  public static function create(): Form
+  public function create(): Form
   {
     $form = new BootstrapForm;
 
@@ -40,7 +40,7 @@ class DatabaseConfigForm
     $form->addSelect('driver', 'Driver', [
       'pdo_mysql' => 'MySQL (PDO)',
       'mysqli' => 'MySQL (mysqli)'
-    ])->setDefaultValue('pdo_mysql');
+    ]);
 
     $form->addSubmit('submit', 'Submit');
 

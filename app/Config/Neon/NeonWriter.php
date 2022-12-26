@@ -33,7 +33,7 @@ class NeonWriter extends Writer
 
     $config = match ($writeOption) {
       WriteOption::Write => $content,
-      WriteOption::Merge => Arrays::mergeTree($config, $content)
+      WriteOption::Merge => Arrays::mergeTree($content, $config)
     };
 
     $path = $this->createPath($fileName);

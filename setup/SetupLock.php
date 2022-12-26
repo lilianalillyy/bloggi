@@ -10,7 +10,7 @@ class SetupLock {
 
     public static function getPath(): string
     {
-        return FileSystem::joinPaths(__DIR__, "..", "..", self::LOCK_NAME);
+        return FileSystem::joinPaths(__DIR__, "..", self::LOCK_NAME);
     } 
 
     public static function lock(): void

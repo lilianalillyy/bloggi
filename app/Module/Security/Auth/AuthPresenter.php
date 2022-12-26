@@ -64,12 +64,6 @@ class AuthPresenter extends BaseSecurityPresenter
     $form = $this->registerFormFactory->create();
 
     $form->onSuccess[] = function (Form $form, RegisterFormData $data) {
-
-      if ($data->password !== $data->repeatPassword) {
-        $this->flashMessage("Hesla se neschodují.");
-        return;
-      }
-
       try {
         $this->user->login(new UserIdentity($this->userFacade->create($data)));
 

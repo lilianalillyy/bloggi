@@ -1,6 +1,6 @@
 search:
     model:
-        in: %appDir%/Model
+        in: %modelDir%
         classes:
             - *Facade
             - *Factory
@@ -8,5 +8,6 @@ search:
             - *Manager
         exclude:
             classes:
-            # EntityManager is registered by Nettrine
-            - App\Model\Database\EntityManager
+                # EntityManager and MigrationManager are registered in extensions/nettrine.neon
+                - App\Model\Database\EntityManager
+                - App\Model\Database\MigrationManager

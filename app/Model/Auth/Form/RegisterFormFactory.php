@@ -39,6 +39,7 @@ class RegisterFormFactory
       ->setRequired();
 
     $form->addPassword('repeatPassword', 'Heslo znovu')
+      ->addRule($form::EQUAL, "Hesla musí být stejná.", $form['password'])
       ->setRequired();
 
     $form->addSubmit('submit', 'Registrovat se');

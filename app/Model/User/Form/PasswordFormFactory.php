@@ -32,7 +32,9 @@ class PasswordFormFactory
 
     $form->addPassword('newPassword', 'Nové heslo')->setRequired();
 
-    $form->addPassword('newPasswordRepeat', 'Nové heslo znovu')->setRequired();
+    $form->addPassword('newPasswordRepeat', 'Nové heslo znovu')
+      ->addRule($form::EQUAL, "Hesla musí být stejná.", $form['newPassword'])
+      ->setRequired();
 
     $form->addSubmit('submit', "Změnit heslo");
 
