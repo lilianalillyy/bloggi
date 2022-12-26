@@ -2,6 +2,7 @@
 
 namespace App\Model\User;
 
+use App\Exception\AuthenticationException;
 use App\Exception\UnexpectedValueException;
 use App\Model\Auth\Form\Data\RegisterFormData;
 use App\Model\Database\EntityManager;
@@ -84,7 +85,7 @@ class UserFacade
   public function updatePassword(User $user, string $oldPassword, string $newPassword): User
   {
     if (!$this->passwords->verify($oldPassword, $user->getPasswordHash())) {
-      throw new UnexpectedValueException("Staré heslo se neshoduje.");
+      throw new AuthenticationException("Staré heslo se neshoduje.");
     }
 
     return $this->forceUpdatePassword($user, $newPassword);
@@ -102,7 +103,7 @@ class UserFacade
       'username' => $data->username,
       'email' => $data->email
     ])) {
-      throw new UnexpectedValueException("Uživatelské jméno nebo email je již používán.");
+      throw new AuthenticationException("Uživatelské jméno nebo email je již používán.");
     }
 
     try {
@@ -116,9 +117,9 @@ class UserFacade
       // Immediately persist the user in the database.
       $this->em->flush();
     } catch (UniqueConstraintViolationException) {
-      throw new UnexpectedValueException("Uživatelské jméno nebo email je již používán.");
+      throw new AuthenticationException("Uživatelské jméno nebo email je již používán.");
     } catch (Exception) {
-      throw new RuntimeException("Nastala neznámá chyba.");
+      throw new AuthenticationException("Nastala neznámá chyba.");
     }
 
     return $user;

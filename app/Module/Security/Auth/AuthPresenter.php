@@ -18,6 +18,11 @@ class AuthPresenter extends BaseSecurityPresenter
 
   public const HOMEPAGE_REDIRECT = ":Front:Homepage:default";
 
+  protected const UNLOGGED_ACTIONS = [
+    "login",
+    "register"
+  ];
+
   public function __construct(
     private readonly LoginFormFactory $loginFormFactory,
     private readonly RegisterFormFactory $registerFormFactory,
@@ -31,14 +36,14 @@ class AuthPresenter extends BaseSecurityPresenter
   {
     if (!$this->getUser()->isLoggedIn()) {
       $this->flashMessage('Nejste přihlášeni.', 'warning');
-      $this->redirect(self::HOMEPAGE_REDIRECT);
+      $this->redirect($this::HOMEPAGE_REDIRECT);
     }
 
     $this->getUser()->logout(true);
     $this->flashMessage('Úspěšně odhlášeni.', 'success');
 
     $this->restoreRequest($this->backlink);
-    $this->redirect(self::HOMEPAGE_REDIRECT);
+    $this->redirect($this::HOMEPAGE_REDIRECT);
   }
 
   public function createComponentLoginForm(): Form
@@ -50,8 +55,8 @@ class AuthPresenter extends BaseSecurityPresenter
         $this->getUser()->login($data->username, $data->password);
 
         $this->restoreRequest($this->backlink);
-        $this->redirect(self::HOMEPAGE_REDIRECT);
-      } catch (Exception $e) {
+        $this->redirect($this::HOMEPAGE_REDIRECT);
+      } catch (AuthenticationException $e) {
         $this->flashMessage($e->getMessage(), "danger");
       }
     };
@@ -68,8 +73,8 @@ class AuthPresenter extends BaseSecurityPresenter
         $this->user->login(new UserIdentity($this->userFacade->create($data)));
 
         $this->restoreRequest($this->backlink);
-        $this->redirect(self::HOMEPAGE_REDIRECT);
-      } catch (Exception $e) {
+        $this->redirect($this::HOMEPAGE_REDIRECT);
+      } catch (AuthenticationException $e) {
         $this->flashMessage($e->getMessage(), "danger");
       }
     };
@@ -79,13 +84,10 @@ class AuthPresenter extends BaseSecurityPresenter
 
   protected function startup()
   {
-    if ($this->getUser()->isLoggedIn() && $this->getAction() !== "logout") {
-      $this->flashMessage('Již jste přihlášeni.', 'warning');
-
-      $this->restoreRequest($this->backlink);
-      $this->redirect(self::HOMEPAGE_REDIRECT);
+    if (in_array($this->getAction(), $this::UNLOGGED_ACTIONS) && $this->user->isLoggedIn()) {
+      return $this->redirect($this::HOMEPAGE_REDIRECT);
     }
-
+    
     parent::startup();
   }
 
