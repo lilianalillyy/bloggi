@@ -6,7 +6,6 @@ use App\Config\Writer;
 use BloggiSetup\Exception\SetupException;
 use Doctrine\DBAL\DriverManager;
 use Exception;
-use RuntimeException;
 
 class DatabaseConfigManager
 {
