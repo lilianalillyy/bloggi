@@ -6,6 +6,7 @@ use App\Model\Database\MigrationManager;
 use BloggiSetup\Exception\SetupException;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
+use Doctrine\Migrations\Configuration\Migration\PhpFile;
 use Exception;
 
 class DatabaseMigrationManager {
@@ -22,12 +23,7 @@ class DatabaseMigrationManager {
   {
     try {
       // Clean the database before migration
-      // TODO: deal with FKs in a different way
-      $this->connection->executeStatement("SET FOREIGN_KEY_CHECKS=0");
-      foreach ($this->schemaManager->listTables() as $table) {
-        $this->schemaManager->dropTable($table);
-      }
-      $this->connection->executeStatement("SET FOREIGN_KEY_CHECKS=1");
+      $this->schemaManager->dropSchemaObjects($this->schemaManager->introspectSchema());
 
       // Ensure metadata storage is at latest version
       $this->migrationManager->ensureInitializedMetadata();
