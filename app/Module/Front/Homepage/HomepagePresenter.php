@@ -3,13 +3,16 @@
 namespace App\Module\Front\Homepage;
 
 use App\Model\Post\PostFacade;
+use App\Model\Sort\Sort;
 use App\Module\Front\BaseFrontPresenter;
+use App\Presenters\Traits\Sorts;
 
 /**
  * @property HomepageTemplate $template
  */
 final class HomepagePresenter extends BaseFrontPresenter
 {
+  use Sorts;
 
   public function __construct(
     private readonly PostFacade $postFacade
@@ -18,26 +21,24 @@ final class HomepagePresenter extends BaseFrontPresenter
     parent::__construct();
   }
 
-  public const SORT_POSTS_BY = [
-    "created_at",
-    "title",
-  ];
-
-  public const DEFAULT_SORT = ["created_at", "p.createdAt"];
-
-  public function renderDefault(int $page = 1, string $sortBy = self::DEFAULT_SORT[0]): void
+  public function getSortColumns(): array
   {
-    if (!in_array($sortBy, self::SORT_POSTS_BY)) {
-      $sortBy = self::DEFAULT_SORT[0];
-    }
+    return [
+      "created_at" => new Sort("p.createdAt", "DESC"),
+      "title" => new Sort("p.title", "DESC"),
+    ];
+  }
 
-    $orderBy = match ($sortBy) {
-      'created_at' => "p.createdAt",
-      'title' => "p.title",
-      default => self::DEFAULT_SORT[1]
-    };
+  public function getDefaultSort(): ?Sort
+  {
+    return $this->getSortColumns()["created_at"];
+  }
 
-    [$paginator, $posts] = $this->postFacade->paged($page, orderBy: $orderBy);
+  public function renderDefault(int $page = 1, ?string $sortBy = null): void
+  {
+    $sort = $this->getSort($sortBy);
+
+    [$paginator, $posts] = $this->postFacade->paged($page, orderBy: $sort->toArray());
 
     $this->template->latestPost = count($posts) ? current($posts) : null;
     $this->template->posts = $posts;

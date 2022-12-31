@@ -2,6 +2,7 @@
 
 namespace App\Model\Post;
 
+use App\Exception\InvalidArgumentException;
 use App\Model\Database\EntityManager;
 use Nette\Utils\Paginator;
 
@@ -56,7 +57,7 @@ class PostFacade
     return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
   }
 
-  public function paged(int $page = 1, int $showPerPage = 5, array $criteria = [], ?string $orderBy = null): array
+  public function paged(int $page = 1, int $showPerPage = 5, array $criteria = [], array $orderBy = []): array
   {
     $paginator = new Paginator();
     $paginator
@@ -70,7 +71,11 @@ class PostFacade
       ->setFirstResult($paginator->getOffset());
 
     if ($orderBy) {
-      $qb->orderBy($orderBy, "DESC");
+      if (count($orderBy) < 2) {
+        throw new InvalidArgumentException('$orderBy must be an array in format [columnName, direction]');
+      }
+
+      $qb->orderBy($orderBy[0], $orderBy[1]);
     }
 
     $posts = $qb->getQuery()->getResult();

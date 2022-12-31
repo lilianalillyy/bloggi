@@ -13,6 +13,7 @@
     "isolatedModules": true,
     "incremental": true,
     "baseUrl": ".",
+    "downlevelIteration": true
   },
   "include": ["resources/**/*.ts"],
   "exclude": ["node_modules"]
