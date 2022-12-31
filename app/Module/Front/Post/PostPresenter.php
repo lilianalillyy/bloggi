@@ -7,9 +7,8 @@ use App\Model\Post\Form\Data\PostCommentFormData;
 use App\Model\Post\Form\PostCommentFormFactory;
 use App\Model\Post\Post;
 use App\Model\Post\PostFacade;
-use App\Model\Post\Rating\PostRating;
+use App\Model\Post\Rating\PostRatingControl;
 use App\Model\Post\Rating\PostRatingFacade;
-use App\Model\Post\Rating\PostRatingKind;
 use App\Presenters\Traits\RequiresAuth;
 use App\Module\Front\BaseFrontPresenter;
 use Exception;
@@ -22,6 +21,8 @@ class PostPresenter extends BaseFrontPresenter
 {
   use RequiresAuth;
 
+  private ?Post $post = null;
+
   public function __construct(
     private readonly PostFacade $postFacade,
     private readonly PostRatingFacade $ratingFacade,
@@ -32,52 +33,35 @@ class PostPresenter extends BaseFrontPresenter
     parent::__construct();
   }
 
-  public function findOrFail(?string $id = null): Post {
-    $post = $this->postFacade->find($id ?? $this->getParameter("id"));
+  public function getPost(): Post {
+    if ($this->post) return $this->post;
+
+    $post = $this->postFacade->find($this->getParameter("id"));
 
     if (!$post) {
       $this->error();
     }
 
-    return $post;
+    return $this->post = $post;
   }
 
   public function renderView(string $id): void
   {
-    $post = $this->findOrFail($id);
-
-    $this->template->post = $post;
-    $this->template->comments = $post->getComments();
-    $this->template->likes = $post->getRatings()->filter(fn (PostRating $rating) => $rating->isLike())->count();
-    $this->template->dislikes = $post->getRatings()->filter(fn (PostRating $rating) => $rating->isDislike())->count();
+    $this->template->post = $this->getPost();
+    $this->template->comments = $this->getPost()->getComments();
   }
 
-  public function handleLike(string $id): void
+  public function createComponentPostRating(): PostRatingControl
   {
-    $post = $this->findOrFail($id);
-
-    $this->ratingFacade->ratePost($post, $this->getLoggedUserOrFail(), PostRatingKind::Like);
-
-    $this->redirect(":view", ["id" => $id]);
-  }
-
-  public function handleDislike(string $id): void
-  {
-    $post = $this->findOrFail($id);
-
-    $this->ratingFacade->ratePost($post, $this->getLoggedUserOrFail(), PostRatingKind::Dislike);
-
-    $this->redirect(":view", ["id" => $id]);
+    return new PostRatingControl($this->getPost());
   }
 
   public function createComponentCommentForm(): Form {
     $form = $this->postCommentFormFactory->create();
 
     $form->onSuccess[] = function (Form $_, PostCommentFormData $data) {
-      $post = $this->findOrFail();
-
       try {
-        $this->commentFacade->create($data, $post, $this->getLoggedUserOrFail());
+        $this->commentFacade->create($data, $this->getPost(), $this->getLoggedUserOrFail());
         $this->flashMessage("Komentář přidán.");
       } catch (Exception $e) {
         $this->flashMessage($e->getMessage(), 'danger');

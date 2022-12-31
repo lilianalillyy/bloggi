@@ -11,12 +11,8 @@ class FrontModule implements Module {
      */
     document.querySelectorAll('.front-bar [data-bs-toggle="tooltip"]').forEach(el => new Tooltip(el).enable())
 
-    
+    document.querySelectorAll('.dropdown-toggle').forEach(el => new Dropdown(el))   
   }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.dropdown-toggle').forEach(el => new Dropdown(el))
-})
 
 startModule(new FrontModule());

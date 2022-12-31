@@ -5,10 +5,7 @@
     <div class="col-md-6 px-0">
       <h1 n:block="title" class="display-4 fst-italic">{$post->getTitle()}</h1>
       <p class="lead my-3">{$post->getPerex()}</p>
-      <p class="lead mb-0" n:snippet="rating">
-        <a n:href="like! $post->getId()" class="ajax text-white btn btn-sm btn-success">+{$likes}</a>
-        <a n:href="dislike! $post->getId()" class="ajax text-white btn btn-sm btn-danger">-{$dislikes}</a>
-      </p>
+      {control postRating}
     </div>
   </div>
 
