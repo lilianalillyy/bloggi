@@ -1,0 +1,46 @@
+{templateType App\Module\Front\Homepage\HomepageTemplate}
+
+{block content}
+  <div class="posts">
+    {if count($posts) >= 1}
+      {foreach $posts as $post}
+        <div class="post">
+          <h1 class="post-title">
+            <a n:href="Post:view $post->getId()">
+              {$post->getTitle()}
+            </a>
+          </h1>
+      
+          <span class="post-date">{$post->getCreatedAt()|date}</span>
+
+          <div>
+            {$post->getPerex()}
+            <hr>
+            {$post->getContent()}
+          </div>
+        </div>
+      {/foreach}
+
+      <nav class="blog-pagination my-5 d-flex align-items-center justify-content-center" aria-label="Pagination">
+        {if !$paginator->isFirst()}
+          <div class="me-3">
+            <a class="btn btn-sm btn-outline-dark ajax" n:href="default, 1">První</a>
+            <a class="btn btn-sm btn-outline-dark ajax" n:href="default, $paginator->getPage() - 1">Předchozí</a>
+          </div>
+        {/if}
+
+        <span>Stránka {$paginator->getPage()} z {$paginator->getPageCount()}</span>
+
+        {if !$paginator->isLast()}
+          <div class="ms-3">
+            <a class="btn btn-sm btn-outline-dark ajax" n:href="default, $paginator->getPage() + 1">Další</a>
+            <a class="btn btn-sm btn-outline-dark ajax" n:href="default, $paginator->getPageCount()">Poslední</a>
+          </div>
+        {/if}
+      </nav>
+
+    {else}
+      <p>Zatím nebyly přidány žádné příspěvky</p>
+    {/if}
+  </div>
+{/block}

@@ -1,0 +1,26 @@
+<div class="sidebar">
+    <div class="container sidebar-sticky">
+      <div class="sidebar-about">
+        <h1>
+          <a href="/">
+            Test Blog
+          </a>
+        </h1>
+        <p class="lead">Lorem ipsum dolor sit amet.</p>
+      </div>
+  
+      <nav class="sidebar-nav">
+        <a class="sidebar-nav-item" n:href="Homepage:default">Home</a>
+        
+        <hr>
+        
+        {if $loggedUser}
+          <a class="sidebar-nav-item active" n:href="User:default">Logged in as {$loggedUser->getUsername()}</a> 
+          <a class="sidebar-nav-item" n:href=":Security:Auth:logout">Log out</a> 
+        {else}
+          <a class="sidebar-nav-item active" n:href=":Security:Auth:login">Login</a>
+        {/if}
+        
+      </nav>
+    </div>
+</div>
