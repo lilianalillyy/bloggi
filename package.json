@@ -31,10 +31,15 @@
     "webpack-notifier": "^1.15.0"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^32.0.0",
     "bootstrap": "^5.2.3",
+    "bootstrap-datepicker": "^1.9.0",
+    "bootstrap-select": "^1.13.18",
     "feather-icons": "^4.29.0",
+    "jquery": "^3.6.3",
     "naja": "^2.5.0",
     "nette-forms": "^3.3.1",
-    "topbar": "^1.0.1"
+    "topbar": "^1.0.1",
+    "ublaboo-datagrid": "^6.9.1"
   }
 }

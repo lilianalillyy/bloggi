@@ -1,5 +1,6 @@
 import { initNaja } from "./naja";
 import { Module, startModule } from "./modules";
+import { initNetteForms } from "./netteForms";
 import feather from "feather-icons";
 
 import "nette-forms";
@@ -13,6 +14,7 @@ export class CommonModule implements Module {
   onDomLoad(): void {
     feather.replace();
     initNaja();
+    initNetteForms();
   }
 }
 

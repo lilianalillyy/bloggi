@@ -1,0 +1,7 @@
+[id^="snippet--"] {
+  transition: opacity 100ms ease-in-out;
+}
+
+[id^="snippet--"].hidden {
+  opacity: 0;
+}

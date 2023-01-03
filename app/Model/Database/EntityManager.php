@@ -7,6 +7,8 @@
  */
 namespace App\Model\Database;
 
+use App\Model\Post\Comment\PostComment;
+use App\Model\Post\Comment\PostCommentRepository;
 use App\Model\Post\Post;
 use App\Model\Post\PostRepository;
 use App\Model\Post\Rating\PostRating;
@@ -35,6 +37,15 @@ class EntityManager extends EntityManagerDecorator
     $repository = $this->getRepository(Post::class);
 
     assert($repository instanceof PostRepository);
+
+    return $repository;
+  }
+
+  public function postComment(): PostCommentRepository
+  {
+    $repository = $this->getRepository(PostComment::class);
+
+    assert($repository instanceof PostCommentRepository);
 
     return $repository;
   }

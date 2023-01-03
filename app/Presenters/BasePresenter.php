@@ -64,4 +64,9 @@ class BasePresenter extends Presenter {
     parent::shutdown($response);
   }
 
+  public function isPresenter(string $presenter): bool
+  {
+    return $presenter === $this->getName();
+  }
+
 }

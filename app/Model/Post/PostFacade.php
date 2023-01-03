@@ -4,6 +4,7 @@ namespace App\Model\Post;
 
 use App\Exception\InvalidArgumentException;
 use App\Model\Database\EntityManager;
+use App\Model\Post\Form\Data\PostFormData;
 use Nette\Utils\Paginator;
 
 class PostFacade
@@ -25,6 +26,32 @@ class PostFacade
   public function find(string $id): ?Post
   {
     return $this->repository->find($id);
+  }
+
+  public function remove(string $id): ?Post
+  {
+    $post = $this->repository->find($id);
+
+    if (!$post) {
+      return null;
+    }
+
+    $ratings = $this->em->postRating()->findBy([ "post" => $post ]);
+
+    foreach ($ratings as $rating) {
+      $this->em->remove($rating);
+    }
+
+    $comments = $this->em->postComment()->findBy([ "post" => $post ]);
+
+    foreach ($comments as $comment) {
+      $this->em->remove($comment);
+    }
+
+    $this->em->remove($post);
+    $this->em->flush();
+
+    return $post;
   }
 
   /**
@@ -81,6 +108,20 @@ class PostFacade
     $posts = $qb->getQuery()->getResult();
 
     return [$paginator, $posts];
+  }
+
+  public function create(PostFormData $data): Post
+  {
+    $post = new Post();
+
+    $post->setTitle($data->title)
+      ->setPerex($data->perex)
+      ->setContent($data->content);
+
+    $this->em->persist($post);
+    $this->em->flush($post);
+
+    return $post;
   }
 
 }

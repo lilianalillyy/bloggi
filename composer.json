@@ -34,7 +34,8 @@
     "ramsey/uuid-doctrine": "^1.8",
     "gedmo/doctrine-extensions": "^3.10",
     "contributte/webpack": "^2.2",
-    "nette/safe-stream": "^3.0"
+    "nette/safe-stream": "^3.0",
+    "ublaboo/datagrid": "^6.9"
   },
   "scripts": {
     "post-install-cmd": [

@@ -1,4 +1,4 @@
-<?php declare(strict_type=1);
+<?php declare(strict_types = 1);
 
 namespace App\Module\Admin;
 
@@ -11,7 +11,12 @@ use App\Presenters\Traits\RequiresAuth;
  */
 class BaseAdminPresenter extends BasePresenter
 {
-
   use RequiresAuth;
+
+  public function beforeRender(): void
+  {
+    parent::beforeRender();
+    $this->redrawControl("sidebar");
+  }
 
 }
